@@ -1,0 +1,81 @@
+# ========================
+# General .NET Ignore
+# ========================
+
+## Build Folders
+bin/
+obj/
+out/
+
+## User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Logs
+*.log
+
+## NuGet Packages
+*.nupkg
+*.snupkg
+packages/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+## Rider IDE
+.idea/
+
+## Visual Studio Code
+.vscode/
+
+## ReSharper
+*.DotSettings.user
+
+## OS Generated Files
+.DS_Store
+Thumbs.db
+
+# ========================
+# EF Core / Database
+# ========================
+
+# SQLite / local DBs
+*.mdf
+*.ldf
+*.sqlite
+*.db
+
+# EF Migrations (opcional: manter no Git é recomendado)
+# Migrations/
+# src/Infra/Migrations/
+
+# ========================
+# Environment / Secrets
+# ========================
+
+.env
+appsettings.*.json
+
+# ========================
+# Temporary Files
+# ========================
+
+*.tmp
+*.temp
+*.bak
+
+# ========================
+# Project-specific folders
+# ========================
+
+# API project
+/src/Api/bin/
+/src/Api/obj/
+
+/src/Infra/bin/
+/src/Infra/obj/
+
+/src/Core/bin/
+/src/Core/obj/
