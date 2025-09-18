@@ -23,6 +23,22 @@ public class EuAjudoDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
+        // consistência de armazenameto de dadas sempre em utc
+        foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+        {
+            foreach (var property in entityType.GetProperties())
+            {
+                if (property.ClrType == typeof(DateTime) || property.ClrType == typeof(DateTime?))
+                {
+                    property.SetValueConverter(
+                        new Microsoft.EntityFrameworkCore.Storage.ValueConversion.ValueConverter<DateTime, DateTime>(
+                            v => v, // já esperamos DateTime em UTC
+                            v => DateTime.SpecifyKind(v, DateTimeKind.Utc))
+                    );
+                }
+            }
+        }
+
         modelBuilder.Entity<OrganizationContributor>()
             .HasKey(oc => new { oc.OrganizationId, oc.ContributorId });
 

@@ -1,13 +1,9 @@
-using System;
 using System.Text.Json;
-using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
-using Xunit;
 using Infra;
 using Core.Models;
 using InfraTests.DB;
-using InfraTests.Collections;
 
 namespace InfraTests.Entities
 {
