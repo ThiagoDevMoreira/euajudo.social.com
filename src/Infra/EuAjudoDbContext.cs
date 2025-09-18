@@ -50,7 +50,7 @@ public class EuAjudoDbContext : DbContext
             .HasForeignKey(om => om.MemberId);
 
         modelBuilder.Entity<MemberRole>()
-            .HasKey(mr => new { mr.MemberId, mr.RoleId, mr.OrganizationId });
+            .HasKey(mr => new { mr.MemberId, mr.OrganizationId });
 
         modelBuilder.Entity<MemberRole>()
             .HasOne(mr => mr.Member)

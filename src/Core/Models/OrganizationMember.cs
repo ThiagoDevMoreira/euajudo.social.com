@@ -6,6 +6,6 @@ public class OrganizationMember
     public Guid MemberId { get; set; }
     public required Organization Organization { get; set; }
     public required Member Member { get; set; }
-    public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.Now;
-    public DateTimeOffset? DeletedAt { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public DateTime? DeletedAt { get; set; }
 }

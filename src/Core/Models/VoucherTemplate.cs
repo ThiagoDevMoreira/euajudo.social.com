@@ -18,8 +18,8 @@ public class VoucherTemplate
     public required string Currency { get; set; } = "BRL";
     public string? CheckoutSite { get; set; }
     public bool IsActive { get; set; } = true;
-    public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.Now;
-    public DateTimeOffset? UpdatedAt { get; set; }
-    public DateTimeOffset? DeletedAt { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public DateTime? UpdatedAt { get; set; }
+    public DateTime? DeletedAt { get; set; }
     public List<VoucherInstance> VoucherInstances { get; set; } = [];
 }

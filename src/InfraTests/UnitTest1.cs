@@ -1,10 +1,8 @@
-﻿namespace InfraTests;
-
-public class UnitTest1
-{
-    [Fact]
-    public void Test1()
-    {
-
-    }
-}
+﻿// namespace InfraTests;
+// public class UnitTest1
+// {
+//     [Fact]
+//     public void Test1()
+//     {
+//     }
+// }

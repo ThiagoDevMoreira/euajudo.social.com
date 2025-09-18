@@ -18,8 +18,8 @@ public class Sale
     public required decimal TotalAmount { get; set; } = 0;
     public required string Currency { get; set; } = "BRL";
     public required string PaymentStatus { get; set; }
-    public DateTimeOffset? PaymentAt { get; set; }
-    public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.Now;
-    public DateTimeOffset? UpdatedAt { get; set; }
+    public DateTime? PaymentAt { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public DateTime? UpdatedAt { get; set; }
     public List<VoucherInstance> VoucherInstances { get; set; } = [];
 }

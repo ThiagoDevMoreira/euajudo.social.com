@@ -10,7 +10,7 @@ public class Campaign
     public string? Website { get; set; }
     public string? CheckoutSite { get; set; }
     public string? Status{ get; set; }
-    public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.Now;
-    public DateTimeOffset? UpdatedAt { get; set; }
-    public DateTimeOffset? DeletedAt { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public DateTime? UpdatedAt { get; set; }
+    public DateTime? DeletedAt { get; set; }
 }

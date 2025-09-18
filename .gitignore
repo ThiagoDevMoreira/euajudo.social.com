@@ -70,12 +70,12 @@ appsettings.*.json
 # Project-specific folders
 # ========================
 
-# API project
 /src/Api/bin/
 /src/Api/obj/
 
 /src/Infra/bin/
 /src/Infra/obj/
+/src/Infra/Migrations/
 
 /src/Core/bin/
 /src/Core/obj/

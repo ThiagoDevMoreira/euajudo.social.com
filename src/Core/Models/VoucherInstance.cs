@@ -16,9 +16,9 @@ public class VoucherInstance
     public required VoucherTemplate VoucherTemplate { get; set; }
     public required string Code { get; set; } = VoucherCodeGenerator.Generate();
     public string? Status { get; set; }
-    public DateTimeOffset CreatedAt { get; init; } = DateTimeOffset.Now;
-    public DateTimeOffset? RedeemedAt { get; set; }
+    public DateTime CreatedAt { get; init; } = DateTime.UtcNow;
+    public DateTime? RedeemedAt { get; set; }
     public Guid? SaleId { get; set; }
     public Sale? Sale { get; set; }
-    public DateTimeOffset? CanceledAt { get; set; }
+    public DateTime? CanceledAt { get; set; }
 }

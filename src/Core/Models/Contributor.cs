@@ -8,9 +8,9 @@ public class Contributor
     public required string Email { get; set; }
     public required string WhatsAppNumber { get; set; }
     public bool IsActive { get; set; } = true;
-    public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.Now;
-    public DateTimeOffset? UpdatedAt { get; set; }
-    public DateTimeOffset? DeletedAt { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public DateTime? UpdatedAt { get; set; }
+    public DateTime? DeletedAt { get; set; }
     public List<OrganizationContributor> OrganizationContributors { get; set; } = [];
     public required List<Campaign> Campaigns { get; set; } = [];
 }

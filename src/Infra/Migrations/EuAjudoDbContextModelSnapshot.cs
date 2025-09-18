@@ -35,10 +35,10 @@ namespace Infra.Migrations
                     b.Property<Guid?>("ContributorId")
                         .HasColumnType("uuid");
 
-                    b.Property<DateTimeOffset>("CreatedAt")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTimeOffset?>("DeletedAt")
+                    b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
@@ -54,7 +54,7 @@ namespace Infra.Migrations
                     b.Property<string>("Status")
                         .HasColumnType("text");
 
-                    b.Property<DateTimeOffset?>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Website")
@@ -75,10 +75,10 @@ namespace Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<DateTimeOffset>("CreatedAt")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTimeOffset?>("DeletedAt")
+                    b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Email")
@@ -96,7 +96,7 @@ namespace Infra.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTimeOffset?>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("WhatsAppNumber")
@@ -117,10 +117,10 @@ namespace Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<DateTimeOffset>("CreatedAt")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTimeOffset?>("DeletedAt")
+                    b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Email")
@@ -138,7 +138,7 @@ namespace Infra.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTimeOffset?>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("WhatsAppNumber")
@@ -158,22 +158,22 @@ namespace Infra.Migrations
                     b.Property<Guid>("MemberId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("RoleId")
-                        .HasColumnType("uuid");
-
                     b.Property<Guid>("OrganizationId")
                         .HasColumnType("uuid");
 
-                    b.Property<DateTimeOffset>("CreatedAt")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("LastUpdate")
                         .HasColumnType("text");
 
-                    b.Property<DateTimeOffset?>("UpdatedAt")
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.HasKey("MemberId", "RoleId", "OrganizationId");
+                    b.HasKey("MemberId", "OrganizationId");
 
                     b.HasIndex("OrganizationId");
 
@@ -194,10 +194,10 @@ namespace Infra.Migrations
                     b.Property<string>("Country")
                         .HasColumnType("text");
 
-                    b.Property<DateTimeOffset>("CreatedAt")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTimeOffset?>("DeletedAt")
+                    b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
@@ -221,7 +221,7 @@ namespace Infra.Migrations
                     b.Property<string>("State")
                         .HasColumnType("text");
 
-                    b.Property<DateTimeOffset?>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Website")
@@ -250,7 +250,7 @@ namespace Infra.Migrations
                     b.Property<decimal?>("ContributeSum")
                         .HasColumnType("numeric");
 
-                    b.Property<DateTimeOffset?>("LastContributeAt")
+                    b.Property<DateTime?>("LastContributeAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("OrganizationId", "ContributorId");
@@ -268,10 +268,10 @@ namespace Infra.Migrations
                     b.Property<Guid>("MemberId")
                         .HasColumnType("uuid");
 
-                    b.Property<DateTimeOffset>("CreatedAt")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTimeOffset?>("DeletedAt")
+                    b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("OrganizationId", "MemberId");
@@ -328,7 +328,7 @@ namespace Infra.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTimeOffset>("CreatedAt")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Currency")
@@ -341,7 +341,7 @@ namespace Infra.Migrations
                     b.Property<Guid>("OrganizationId")
                         .HasColumnType("uuid");
 
-                    b.Property<DateTimeOffset?>("PaymentAt")
+                    b.Property<DateTime?>("PaymentAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("PaymentStatus")
@@ -351,7 +351,7 @@ namespace Infra.Migrations
                     b.Property<decimal>("TotalAmount")
                         .HasColumnType("numeric");
 
-                    b.Property<DateTimeOffset?>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
@@ -375,17 +375,17 @@ namespace Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<DateTimeOffset?>("CanceledAt")
+                    b.Property<DateTime?>("CanceledAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Code")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTimeOffset>("CreatedAt")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTimeOffset?>("RedeemedAt")
+                    b.Property<DateTime?>("RedeemedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<Guid?>("SaleId")
@@ -426,14 +426,14 @@ namespace Infra.Migrations
                         .IsRequired()
                         .HasColumnType("jsonb");
 
-                    b.Property<DateTimeOffset>("CreatedAt")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Currency")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTimeOffset?>("DeletedAt")
+                    b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<bool>("IsActive")
@@ -454,7 +454,7 @@ namespace Infra.Migrations
                     b.Property<string>("Subtype")
                         .HasColumnType("text");
 
-                    b.Property<DateTimeOffset?>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");

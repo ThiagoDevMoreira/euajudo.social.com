@@ -18,9 +18,9 @@ public class Organization
     public required Document Document { get; set; }
     public required JsonDocument Settings { get; set; }
     public bool IsActive { get; set; } = true;
-    public DateTimeOffset CreatedAt { get; init; } = DateTimeOffset.Now;
-    public DateTimeOffset? UpdatedAt { get; set; }
-    public DateTimeOffset? DeletedAt { get; set; }
+    public DateTime CreatedAt { get; init; } = DateTime.UtcNow;
+    public DateTime? UpdatedAt { get; set; }
+    public DateTime? DeletedAt { get; set; }
     public List<OrganizationMember> OrganizationMembers { get; set; } = [];
     public List<OrganizationContributor> OrganizationContributors { get; set; } = [];
     public List<Campaign> Campaigns { get; set; } = [];
