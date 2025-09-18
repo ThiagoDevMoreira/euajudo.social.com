@@ -6,7 +6,7 @@ namespace Infra;
 public class EuAjudoDbContext : DbContext
 {
     public EuAjudoDbContext(DbContextOptions<EuAjudoDbContext> options) : base(options) { }
-
+    
     public DbSet<Campaign> Campaigns { get; set; }
     public DbSet<Contributor> Contributors { get; set; }
     public DbSet<Member> Members { get; set; }
@@ -36,7 +36,6 @@ public class EuAjudoDbContext : DbContext
             .WithMany(c => c.OrganizationContributors)
             .HasForeignKey(oc => oc.ContributorId);
 
-        // OrganizationMember (N:N com payload extra)
         modelBuilder.Entity<OrganizationMember>()
             .HasKey(om => new { om.OrganizationId, om.MemberId });
 
@@ -50,7 +49,6 @@ public class EuAjudoDbContext : DbContext
             .WithMany(m => m.OrganizationMembers)
             .HasForeignKey(om => om.MemberId);
 
-        // MemberRole (N:N entre Member, Role e Organization)
         modelBuilder.Entity<MemberRole>()
             .HasKey(mr => new { mr.MemberId, mr.RoleId, mr.OrganizationId });
 
@@ -60,14 +58,10 @@ public class EuAjudoDbContext : DbContext
             .HasForeignKey(mr => mr.MemberId);
 
         modelBuilder.Entity<MemberRole>()
-            .HasOne(mr => mr.Role)
-            .WithMany() 
-            .HasForeignKey(mr => mr.RoleId);
-
-        modelBuilder.Entity<MemberRole>()
             .HasOne(mr => mr.Organization)
             .WithMany()
             .HasForeignKey(mr => mr.OrganizationId);
+
         modelBuilder.Entity<Organization>()
             .HasIndex(o => o.Email)
             .IsUnique();
