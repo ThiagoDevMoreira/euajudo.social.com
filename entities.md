@@ -14,7 +14,7 @@ public record Document (string Number, string Type);
 
 public class Campaign
 {
-    public Guid Id { get; set; }
+    public Guid Id { get; set; } = Guid.NewGuid(); // é sobrescrito pelo EF quando é carregado um registgro existente no banco.
     public Guid OrganizationId { get; set; }
     public required Organization Organization { get; set; }
     public required string Name { get; set; }
@@ -28,7 +28,7 @@ public class Campaign
 }
 public class Contributor
 {
-    public Guid Id { get; set; }
+    public Guid Id { get; set; } = Guid.NewGuid(); // é sobrescrito pelo EF quando é carregado um registgro existente no banco.
     public required string FirstName { get; set; }
     public required string Lastname { get; set; }
     public required string Email { get; set; }
@@ -42,7 +42,7 @@ public class Contributor
 }
 public class Member
 {
-    public Guid Id { get; set; }
+    public Guid Id { get; set; } = Guid.NewGuid(); // é sobrescrito pelo EF quando é carregado um registgro existente no banco.
     public List<OrganizationMember> OrganizationMembers {get; set;} = [];
     public List<MemberRole> MemberRoles {get; set;} = [];
     public required string FirstName { get; set; }
@@ -68,7 +68,7 @@ public class MemberRole
 }
 public class Organization
 {
-    public Guid Id { get; set; }
+    public Guid Id { get; set; } = Guid.NewGuid(); // é sobrescrito pelo EF quando é carregado um registgro existente no banco.
     public required string Name { get; set; }
     public string? Description { get; set; }
     public string? Country { get; set; }
@@ -108,13 +108,13 @@ public class OrganizationMember
 }
 public class Role
 {
-    public Guid Id { get; set; }
+    public Guid Id { get; set; } = Guid.NewGuid(); // é sobrescrito pelo EF quando é carregado um registgro existente no banco.
     public required string Name { get; set; }
     public required string Description { get; set; }
 }
 public class Sale
 {
-    public Guid Id { get; set; }
+    public Guid Id { get; set; } = Guid.NewGuid(); // é sobrescrito pelo EF quando é carregado um registgro existente no banco.
     public Guid OrganizationId { get; set; }
     public required Organization Organization { get; set; }
     public Guid CampaignId { get; set; }
@@ -145,7 +145,7 @@ public static class VoucherCodeGenerator
 }
 public class VoucherInstance
 {
-    public Guid Id { get; set; }
+    public Guid Id { get; set; } = Guid.NewGuid(); // é sobrescrito pelo EF quando é carregado um registgro existente no banco.
     public Guid VoucherTemplateId { get; set; }
     public required VoucherTemplate VoucherTemplate { get; set; }
     public required string Code { get; set; } = VoucherCodeGenerator.Generate();
@@ -158,7 +158,7 @@ public class VoucherInstance
 }
 public class VoucherTemplate
 {
-    public Guid Id { get; set; }
+    public Guid Id { get; set; } = Guid.NewGuid(); // é sobrescrito pelo EF quando é carregado um registgro existente no banco.
     public Guid OrganizationId { set; get; }
     public required Organization Organization { get; set; }
     public Guid CampaignId { set; get; }

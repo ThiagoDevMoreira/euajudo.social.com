@@ -34,6 +34,7 @@ namespace InfraTests.Entities
             {
                 Id = Guid.NewGuid(),
                 Name = "ONG Teste",
+                Description = "ONG Teste, criada pela estrutura de testes de infra estrutura automatizados.",
                 Email = "ong1@test.local",
                 WhatsAppNumber = "5511999999999",
                 Document = new Document("12345678901", "CNPJ"),
@@ -59,6 +60,7 @@ namespace InfraTests.Entities
             {
                 Id = Guid.NewGuid(),
                 Name = "ONG A",
+                Description = "ONG A (teste de duplicação de email), criada pela estrutura de testes de infra estrutura automatizados.",
                 Email = "duplicado@test.local",
                 WhatsAppNumber = "5511000000000",
                 Document = new Document("111", "CNPJ"),
@@ -69,6 +71,7 @@ namespace InfraTests.Entities
             {
                 Id = Guid.NewGuid(),
                 Name = "ONG B",
+                Description = "ONG B (teste de duplicação de email), criada pela estrutura de testes de infra estrutura automatizados.",
                 Email = "duplicado@test.local", // mesmo email
                 WhatsAppNumber = "5522000000000",
                 Document = new Document("222", "CNPJ"),

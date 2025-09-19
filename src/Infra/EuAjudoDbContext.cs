@@ -8,9 +8,10 @@ public class EuAjudoDbContext : DbContext
     public EuAjudoDbContext(DbContextOptions<EuAjudoDbContext> options) : base(options) { }
     
     public DbSet<Campaign> Campaigns { get; set; }
+    public DbSet<CampaignContributor> CampaignContributor { get; set; }
+    public DbSet<CampaignMember> CampaignMember { get; set; }
     public DbSet<Contributor> Contributors { get; set; }
     public DbSet<Member> Members { get; set; }
-    public DbSet<MemberRole> MemberRoles { get; set; }
     public DbSet<Organization> Orgs { get; set; }
     public DbSet<OrganizationContributor> OrgContributors { get; set; }
     public DbSet<OrganizationMember> OrgMembers { get; set; }
@@ -39,59 +40,81 @@ public class EuAjudoDbContext : DbContext
             }
         }
 
-        modelBuilder.Entity<OrganizationContributor>()
-            .HasKey(oc => new { oc.OrganizationId, oc.ContributorId });
-
-        modelBuilder.Entity<OrganizationContributor>()
-            .HasOne(oc => oc.Organization)
-            .WithMany(o => o.OrganizationContributors)
-            .HasForeignKey(oc => oc.OrganizationId);
-
-        modelBuilder.Entity<OrganizationContributor>()
-            .HasOne(oc => oc.Contributor)
-            .WithMany(c => c.OrganizationContributors)
-            .HasForeignKey(oc => oc.ContributorId);
-
+        // chaves compostas únicas
         modelBuilder.Entity<OrganizationMember>()
             .HasKey(om => new { om.OrganizationId, om.MemberId });
 
+        modelBuilder.Entity<OrganizationContributor>()
+            .HasKey(oc => new { oc.OrganizationId, oc.ContributorId });
+
+        modelBuilder.Entity<CampaignMember>()
+            .HasKey(cm => new { cm.CampaignId, cm.MemberId });
+
+        modelBuilder.Entity<CampaignContributor>()
+            .HasKey(cc => new { cc.CampaignId, cc.ContributorId });
+
+        //relações A <1:1> B <1:1> A
+        //relações A <1:1> B <1:N> A
         modelBuilder.Entity<OrganizationMember>()
-            .HasOne(om => om.Organization)
-            .WithMany(o => o.OrganizationMembers)
-            .HasForeignKey(om => om.OrganizationId);
+            .HasOne(om => om.Role)
+            .WithMany(r => r.OrganizationMembers)
+            .HasForeignKey(om => om.RoleId)
+            .IsRequired();
 
-        modelBuilder.Entity<OrganizationMember>()
-            .HasOne(om => om.Member)
-            .WithMany(m => m.OrganizationMembers)
-            .HasForeignKey(om => om.MemberId);
-
-        modelBuilder.Entity<MemberRole>()
-            .HasKey(mr => new { mr.MemberId, mr.OrganizationId });
-
-        modelBuilder.Entity<MemberRole>()
-            .HasOne(mr => mr.Member)
-            .WithMany(m => m.MemberRoles)
-            .HasForeignKey(mr => mr.MemberId);
-
-        modelBuilder.Entity<MemberRole>()
-            .HasOne(mr => mr.Organization)
-            .WithMany()
-            .HasForeignKey(mr => mr.OrganizationId);
-
-        modelBuilder.Entity<Organization>()
-            .HasIndex(o => o.Email)
-            .IsUnique();
-
-        modelBuilder.Entity<Contributor>()
-            .HasIndex(c => c.Email)
-            .IsUnique();
-
-        modelBuilder.Entity<Member>()
-            .HasIndex(m => m.Email)
-            .IsUnique();
+        modelBuilder.Entity<Campaign>()
+            .HasOne(c => c.Organization)
+            .WithMany(o => o.Campaigns)
+            .HasForeignKey(c => c.OrganizationId)
+            .IsRequired();
 
         modelBuilder.Entity<Sale>()
-            .HasIndex(s => s.ContributorEmail);
+            .HasOne(s => s.Organization)
+            .WithMany(o => o.Sales)
+            .HasForeignKey(s => s.OrganizationId)
+            .IsRequired();
+
+        modelBuilder.Entity<Sale>()
+            .HasOne(s => s.Member)
+            .WithMany(m => m.Sales)
+            .HasForeignKey(s => s.MemberId)
+            .IsRequired();
+
+        modelBuilder.Entity<Sale>()
+            .HasOne(s => s.Campaign)
+            .WithMany(c => c.Sales)
+            .HasForeignKey(s => s.CampaignId)
+            .IsRequired();
+
+        modelBuilder.Entity<Sale>()
+            .HasOne(s => s.Contributor)
+            .WithMany(c => c.Sales)
+            .HasForeignKey(s => s.ContributorId)
+            .IsRequired();
+
+        modelBuilder.Entity<VoucherInstance>()
+            .HasOne(vi => vi.VoucherTemplate)
+            .WithMany(vt => vt.VoucherInstances)
+            .HasForeignKey(vi => vi.VoucherTemplateId)
+            .IsRequired();
+
+        modelBuilder.Entity<VoucherInstance>()
+            .HasOne(vi => vi.Sale)
+            .WithMany(s => s.VoucherInstances)
+            .HasForeignKey(vi => vi.SaleId)
+            .IsRequired(false); // atenção: relação opcional
+
+        modelBuilder.Entity<VoucherTemplate>()
+            .HasOne(vt => vt.Organization)
+            .WithMany()
+            .HasForeignKey(vt => vt.OrganizationId)
+            .IsRequired();
+
+        modelBuilder.Entity<VoucherTemplate>()
+            .HasOne(vt => vt.Campaign)
+            .WithMany(c => c.VoucherTemplates)
+            .HasForeignKey(vt => vt.CampaignId)
+            .IsRequired();
+
         modelBuilder.Entity<Organization>()
             .OwnsOne(o => o.Document, d =>
             {
