@@ -30,4 +30,3 @@ public class Organization
     public List<OrganizationMember> OrganizationMembers { get; set; } = [];
     public List<OrganizationContributor> organizationContributors { get; set; } = [];
 }
-

@@ -8,7 +8,4 @@ public class CampaignContributor
 
     public Guid ContributorId { get; set; }
     public required Contributor Contributor { get; set; }
-
-    //dados adicionais
-
 }

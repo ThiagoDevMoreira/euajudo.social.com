@@ -10,4 +10,3 @@ public class Role
     //relações
     public List<OrganizationMember> OrganizationMembers { get; set; } = [];
 }
-

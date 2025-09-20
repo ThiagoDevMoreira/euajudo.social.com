@@ -28,4 +28,3 @@ public class VoucherInstance
     public Guid SaleId { get; set; }
     public required Sale Sale { get; set; }
 }
-

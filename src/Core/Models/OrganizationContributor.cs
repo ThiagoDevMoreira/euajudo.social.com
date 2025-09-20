@@ -9,4 +9,3 @@ public class OrganizationContributor
     public DateTime? LastContributeAt { get; set; }
     public decimal? ContributeSum { get; set; }
 }
-
