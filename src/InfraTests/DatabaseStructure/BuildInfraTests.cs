@@ -23,9 +23,7 @@ namespace InfraTests.DatabaseStructure
                           .Options;
 
             await using var ctx = new EuAjudoDbContext(options);
-
             var podeConectar = await ctx.Database.CanConnectAsync();
-
             podeConectar.Should().BeTrue();
         }
     }

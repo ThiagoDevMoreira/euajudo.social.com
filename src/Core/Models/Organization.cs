@@ -19,14 +19,14 @@ public class Organization
     public required JsonDocument Settings { get; set; }
 
     //auditoria
-    public bool IsActive { get; set; } = true;
+    public required bool IsActive { get; set; } = true;
     public DateTime CreatedAt { get; init; } = DateTime.UtcNow;
     public DateTime? UpdatedAt { get; set; }
     public DateTime? DeletedAt { get; set; }
 
     //relações
-    public List<Campaign> Campaigns { get; set; } = [];
-    public List<Sale> Sales { get; set; } = [];
-    public List<OrganizationMember> OrganizationMembers { get; set; } = [];
-    public List<OrganizationContributor> organizationContributors { get; set; } = [];
+    public List<Campaign>? Campaigns { get; set; } = [];
+    public List<Sale>? Sales { get; set; } = [];
+    public List<OrganizationMember>? OrganizationMembers { get; set; } = [];
+    public List<OrganizationContributor>? OrganizationContributors { get; set; } = [];
 }
