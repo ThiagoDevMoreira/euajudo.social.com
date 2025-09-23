@@ -1,7 +1,7 @@
 using InfraTests.DB;
 
-namespace InfraTests.Collections
-{
-    [CollectionDefinition("InfraTests")]
-    public class InfraTestsCollection : ICollectionFixture<PostgresTestDatabaseFixture> {}
-}
+namespace InfraTests.Collections;
+
+[CollectionDefinition("InfraTests")]
+public class InfraTestsCollection : ICollectionFixture<PostgresTestDatabaseFixture> {}
+

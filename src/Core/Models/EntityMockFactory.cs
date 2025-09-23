@@ -43,7 +43,7 @@ public static class EntitiesMockFactory
         return new Member
         {
             FirstName = "Maria",
-            Lastname = "Silva",
+            LastName = "Silva",
             Email = "maria@example.com",
             WhatsAppNumber = "+5511988888888",
             IsActive = true

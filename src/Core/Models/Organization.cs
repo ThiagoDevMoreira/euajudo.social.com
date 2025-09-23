@@ -25,8 +25,8 @@ public class Organization
     public DateTime? DeletedAt { get; set; }
 
     //relações
-    public List<Campaign>? Campaigns { get; set; } = [];
-    public List<Sale>? Sales { get; set; } = [];
-    public List<OrganizationMember>? OrganizationMembers { get; set; } = [];
-    public List<OrganizationContributor>? OrganizationContributors { get; set; } = [];
+    public List<Campaign> Campaigns { get; set; } = [];
+    public List<Sale> Sales { get; set; } = [];
+    public List<OrganizationMember> OrganizationMembers { get; set; } = [];
+    public List<OrganizationContributor> OrganizationContributors { get; set; } = [];
 }

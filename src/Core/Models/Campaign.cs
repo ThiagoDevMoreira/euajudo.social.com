@@ -1,7 +1,6 @@
 namespace Core.Models;
 
-public class Campaign
-{
+public class Campaign {
     public Guid Id { get; set; } = Guid.NewGuid();
 
     public required string Name { get; set; }
@@ -9,7 +8,7 @@ public class Campaign
     public string? Website { get; set; }
     public string? CheckoutSite { get; set; }
     public string Status { get; set; } = "Rascunho";
-    
+
     // auditoria
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime? UpdatedAt { get; set; }

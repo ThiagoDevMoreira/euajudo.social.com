@@ -1,4 +1,5 @@
 using NanoidDotNet;
+
 namespace Core.Models;
 
 public static class VoucherCode

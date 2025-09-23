@@ -7,18 +7,18 @@ public class EuAjudoDbContext : DbContext
 {
     public EuAjudoDbContext(DbContextOptions<EuAjudoDbContext> options) : base(options) { }
     
-    public DbSet<Campaign> Campaigns { get; set; }
+    public DbSet<Campaign> Campaign { get; set; }
     public DbSet<CampaignContributor> CampaignContributor { get; set; }
     public DbSet<CampaignMember> CampaignMember { get; set; }
-    public DbSet<Contributor> Contributors { get; set; }
-    public DbSet<Member> Members { get; set; }
-    public DbSet<Organization> Orgs { get; set; }
-    public DbSet<OrganizationContributor> OrgContributors { get; set; }
-    public DbSet<OrganizationMember> OrgMembers { get; set; }
+    public DbSet<Contributor> Contributor { get; set; }
+    public DbSet<Member> Member { get; set; }
+    public DbSet<Organization> Organization { get; set; }
+    public DbSet<OrganizationContributor> OrganizationContributor { get; set; }
+    public DbSet<OrganizationMember> OrganizationMember { get; set; }
     public DbSet<Role> Roles { get; set; }
-    public DbSet<Sale> Sales { get; set; }
-    public DbSet<VoucherInstance> VoucherInstances { get; set; }
-    public DbSet<VoucherTemplate> VoucherTemplates { get; set; }
+    public DbSet<Sale> Sale { get; set; }
+    public DbSet<VoucherInstance> VoucherInstance { get; set; }
+    public DbSet<VoucherTemplate> VoucherTemplate { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
