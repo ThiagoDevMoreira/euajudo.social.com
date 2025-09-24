@@ -7,4 +7,6 @@ public class CampaignMember
 
     public Guid MemberId { get; set; }
     public required Member Member { get; set; }
+
+    public string CampaignRole {get; set; } = "defaut"; // or "Coordinator"
 }
