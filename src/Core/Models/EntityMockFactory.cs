@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using System.Text.Json;
 
 namespace Core.Models;
@@ -24,18 +25,18 @@ public static class EntitiesMockFactory
 
     private static Organization CreateOrganization()
     {
-        return new Organization
-        {
-            Description = "ONG Exemplo",
-            Country = "Brazil",
-            State = "SP",
-            City = "São Paulo",
-            Email = "org@example.com",
-            WhatsAppNumber = "+5511999999999",
-            Document = new Document("12345678901234", "CNPJ"),
-            Settings = JsonDocument.Parse("{\"theme\":\"default\"}"),
-            IsActive = true
-        };
+                return new Organization
+                {
+                    Description = "ONG Exemplo",
+                    Country = "Brazil",
+                    State = "SP",
+                    City = "São Paulo",
+                    Email = "org@example.com",
+                    WhatsAppNumber = "+5511999999999",
+                    Document = new Document("12345678901234", "CNPJ"),
+                    Settings = JsonDocument.Parse("{\"theme\":\"default\"}"),
+                    IsActive = true,
+                };
     }
 
     private static Member CreateMember()

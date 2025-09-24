@@ -15,7 +15,7 @@ public class EuAjudoDbContext : DbContext
     public DbSet<Organization> Organization { get; set; }
     public DbSet<OrganizationContributor> OrganizationContributor { get; set; }
     public DbSet<OrganizationMember> OrganizationMember { get; set; }
-    public DbSet<Role> Roles { get; set; }
+    public DbSet<Role> Role { get; set; }
     public DbSet<Sale> Sale { get; set; }
     public DbSet<VoucherInstance> VoucherInstance { get; set; }
     public DbSet<VoucherTemplate> VoucherTemplate { get; set; }

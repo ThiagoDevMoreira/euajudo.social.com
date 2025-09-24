@@ -45,6 +45,28 @@ O desenvolvimento seguirá uma trilha evolutiva de aprendizado e robustez, parti
 - Controllers acessam o `DbContext` diretamente.
 - Migrations geradas direto no projeto de Infra.
 
+#### Referencia da organização do código
+
+> mapa de referencia da estrutura de pastas do projeto euajudo.social.br
+
+```
+\euajudo
+\euajudo\src
+\euajudo\src\Api //-> Projeto que disponibiliza o sistema para cliente frontend.
+\euajudo\src\Api\appsettings.json // contém string de conexão
+\euajudo\src\Core //-> Projeto que reune todas as regras de negócio e a modelagem das entidades.
+\euajudo\src\Core\Models // definição das entidades.
+\euajudo\src\Infra //-> Projeto que gerencia repositório, dbcontext
+\euajudo\src\Infra\EuAjudoDbContext.cs
+\euajudo\src\InfraTests //-> Projeto para testar a infraestrutura model-dbcontext-postgres e a relação entre entidades.
+\euajudo\src\InfraTests\Entities // um arquivo de teste por entidade e um arquivo de testes de relações entre entidades.
+\euajudo\src\Utils // coleção de classes de apoio atuais e futuras.
+\euajudo\Blueprint.md //-> referências técnicas e funcionais para o desenvolvimento do projeto euajudo.social.
+\euajudo\EntitiesDataModelMap.md //-> referência da modelagem de dados das entidades.
+\euajudo\FolderMap.md //-> este arquivo, mapeamento das pastas que compõem o projeto euajudo.social
+\euajudo\EuAjudo.sln
+```
+
 ### Etapa 2 — **API + Application + Infra (sem Domain explícito)**
 - Introdução da camada Application para organizar regras de negócio fora dos Controllers.
 - `Infra` fornece acesso ao banco, mas ainda sem separação completa de entidades de domínio.
