@@ -1,5 +1,6 @@
 using Xunit;
 using Core.Models;
+using Core.Models.MockFactory;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json;
 

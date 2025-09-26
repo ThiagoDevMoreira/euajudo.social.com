@@ -1,9 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Core.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Infra.Auth;
+using Microsoft.AspNetCore.Identity;
 
 namespace Infra;
 
-public class EuAjudoDbContext : DbContext
+public class EuAjudoDbContext : IdentityDbContext<AppUser, IdentityRole<Guid>, Guid>
 {
     public EuAjudoDbContext(DbContextOptions<EuAjudoDbContext> options) : base(options) { }
     
@@ -23,6 +26,17 @@ public class EuAjudoDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+
+        // detalhes de AppUser (Auth)
+        modelBuilder.Entity<AppUser>(b =>
+        {
+            b.Property(u => u.MemberId).IsRequired();
+            b.HasOne<Member>() // sem navegação inversa no MVP
+             .WithOne()
+             .HasForeignKey<AppUser>(u => u.MemberId)
+             .OnDelete(DeleteBehavior.Restrict);
+            b.HasIndex(u => u.MemberId).IsUnique(); // 1:1
+        });
 
         // consistência de armazenameto de dadas sempre em utc
         foreach (var entityType in modelBuilder.Model.GetEntityTypes())

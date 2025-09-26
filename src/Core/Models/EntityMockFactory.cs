@@ -1,8 +1,6 @@
-using System.Runtime.CompilerServices;
 using System.Text.Json;
 
-namespace Core.Models;
-
+namespace Core.Models.MockFactory;
 public static class EntitiesMockFactory
 {
     public static T Create<T>() where T : class
@@ -113,7 +111,7 @@ public static class EntitiesMockFactory
         return new Contributor
         {
             FirstName = "João",
-            Lastname = "Pereira",
+            LastName = "Pereira",
             Email = "joao@example.com",
             WhatsAppNumber = "+5511977777777",
             IsActive = true
