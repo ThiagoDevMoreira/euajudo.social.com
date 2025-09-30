@@ -3,4 +3,11 @@
 GET {{Api_HostAddress}}/weatherforecast/
 Accept: application/json
 
-###
+### Teste do Login
+POST {{Api_HostAddress}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@euajudo.org",
+  "password": "Admin@123"
+}

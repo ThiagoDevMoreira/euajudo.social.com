@@ -41,6 +41,12 @@ Objetivos desta documentação:
 O desenvolvimento seguirá uma trilha evolutiva de aprendizado e robustez, partindo de implementações mais simples até a estrutura Enterprise. Essa abordagem reflete o roadmap discutido em **"Abordagem didática"**.
 
 ### Etapa 1 — **API + Infra (DbContext no Controller)**
+
+> **Centralidade de Member**
+> O AppUser é apenas a credencial de login.
+> Member é a entidade central do domínio: todo bootstrap e todas as atividades (Organizações, Campanhas, Vouchers, Vendas) partem dele.
+> Por isso, o login não retorna dados de domínio — esse papel é do MemberController (que usará o MemberId resolvido do token).
+
 - Estrutura inicial simples, para aprendizado.
 - Controllers acessam o `DbContext` diretamente.
 - Migrations geradas direto no projeto de Infra.
@@ -141,7 +147,22 @@ All entity and field names are standardized in **English** to ensure consistency
 ## 7. Segurança
 
 * MVP: Identity + JWT simples.
+
+### Autenticação no MVP
+
+Implementada com ASP.NET Core Identity (AppUser com Guid como PK e vínculo obrigatório com MemberId).
+JWT (HS256) gerado pela própria API no login.
+O endpoint /auth/login será minimalista: valida usuário/senha e retorna apenas { token, expiresAt }.
+Nenhum payload de domínio é retornado pelo login. Isso garante independência total entre o mecanismo de autenticação e o domínio principal.
+
 * Enterprise: refresh tokens, roles (Admin ONG, Volunteer, Buyer), rate limiting, proteções antifraude.
+
+### Autorização no MVP
+
+Usaremos policies baseadas em OrganizationMember.
+Cada request autenticado deve incluir X-Org-Id (ou rota com orgId).
+A policy MustBeMemberOfOrg valida que o MemberId presente no token está vinculado àquela organização via OrganizationMember + Role.
+O Identity não é usado para RBAC de negócio. Roles do Identity ficam para controle técnico (se necessário), enquanto Role do domínio é usado para permissões de organização.
 
 ---
 
