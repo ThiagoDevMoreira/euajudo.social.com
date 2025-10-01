@@ -11,3 +11,8 @@ Content-Type: application/json
   "email": "admin@euajudo.org",
   "password": "Admin@123"
 }
+
+### Me (com token)
+GET http://localhost:5184/member/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyNTYzMzE0MC00Yjg3LTRjOTEtYTBiOS0yMjJlZGE1Zjc2ZjEiLCJtZW1iZXJJZCI6ImVkZTQzZTA5LTBlYzEtNDQ4OS1hYzY2LTQ4Yzg0ZTkwNTgxZiIsImVtYWlsIjoiYWRtaW5AZXVhanVkby5vcmciLCJleHAiOjE3NTkyODA3NjEsImlzcyI6ImV1YWp1ZG8uYXBpIiwiYXVkIjoiZXVhanVkby5hcGkifQ.BrSD3vMRKl85igOK1FtF5i-QNeS_NW4vFgz5hBflYfo
+Accept: application/json
