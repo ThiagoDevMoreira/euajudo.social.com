@@ -1,85 +1,97 @@
-# 🌐 EuAjudo - Plataforma de Apoio Social
+# 🌐 EuAjudo — Tecnologia para ampliar impacto social
 
-O **EuAjudo** é uma plataforma digital criada para conectar pessoas e instituições em ações de solidariedade, voluntariado e doações.  
-O objetivo principal é **facilitar a colaboração social** através de tecnologia, oferecendo um espaço simples e seguro para integrar quem precisa de ajuda e quem deseja ajudar.
+EuAjudo é uma plataforma SaaS pensada para ONGs e coletivos que vendem produtos solidários (pizzas, rifas, artesanato) para financiar suas ações. O objetivo é digitalizar o ciclo completo de campanhas, da venda do voucher à retirada do item, oferecendo transparência e autonomia para equipes voluntárias.
 
----
-
-## 🚀 Propósito da Plataforma
-
-- **Conectar** pessoas dispostas a ajudar com instituições e causas sociais.  
-- **Organizar** ações de voluntariado, campanhas e doações de forma eficiente.  
-- **Escalar** o impacto social usando uma arquitetura robusta, moderna e sustentável.  
+Este repositório consolida o MVP inicial e evoluirá seguindo um roadmap didático que demonstra como um desenvolvedor .NET/Angular pode estruturar um produto real do zero até padrões enterprise.
 
 ---
 
-## 🛠️ Stack Tecnológica
-
-A plataforma será construída sobre uma stack moderna e de longo prazo:
-
-- **Backend:** C# .NET 9 (ASP.NET Core)  
-- **Frontend:** Angular (TypeScript)  
-- **Banco de Dados:** PostgreSQL  
-- **Infraestrutura:** Docker + Kubernetes (futuro)  
-- **ORM:** Entity Framework Core  
-- **Versionamento:** GitHub  
+## 🚀 Por que este projeto importa
+- **Impacto social real**: ajuda instituições a organizar arrecadações, controlar estoques e dar visibilidade aos resultados.
+- **Experiência prática**: une backend .NET 9, frontend Angular e PostgreSQL, refletindo stacks exigidas em projetos corporativos.
+- **Portfólio profissional**: demonstra domínio de arquitetura em camadas, testes e boas práticas — ideal para talentos em transição de júnior para pleno.
 
 ---
 
-## 📈 Roadmap de Desenvolvimento
-
-O desenvolvimento será evolutivo, dividido em etapas claras:  
-
-### ✅ Etapa 1 - MVP (atual)
-- Estrutura inicial em **ASP.NET MVC**.  
-- Configuração do **DbContext** e conexão com PostgreSQL.  
-- API básica de autenticação e cadastro de usuários.  
-
-### 🔜 Etapa 2 - API + Infra
-- Reorganização da solução em **camadas (API + Infra + Domain + Application)**.  
-- Controllers utilizando **DbContext** via camada de infraestrutura.  
-- Estrutura de testes unitários básicos.  
-
-### 📌 Etapa 3 - Frontend Angular
-- Criação do frontend em Angular.  
-- Integração com a API (cadastro, login, listagem inicial de entidades).  
-- Layout inicial responsivo.  
-
-### 📌 Etapa 4 - Domínio Expandido
-- Implementação de casos de uso principais (doações, campanhas, voluntariado).  
-- Regras de negócio organizadas em **camada de domínio**.  
-- Ampliação da cobertura de testes automatizados.  
-
-### 📌 Etapa 5 - Enterprise Ready
-- Arquitetura completa com todas as camadas:  
-  - **API** (controllers, endpoints REST).  
-  - **Application** (casos de uso, DTOs).  
-  - **Domain** (entidades, agregados, eventos de domínio).  
-  - **Infra** (persistência, repositórios, integração externa).  
-- Autenticação e autorização robustas (Identity + JWT).  
-- Monitoramento, observabilidade e logs estruturados.  
-
-### 📌 Etapa 6 - Escalabilidade
-- Preparação para ambientes de nuvem.  
-- Containerização com Docker.  
-- Orquestração com Kubernetes.  
-- CI/CD configurado com GitHub Actions.  
+## 🛠️ Stack atual do MVP (Etapa 1)
+- **Backend**: ASP.NET Core (.NET 9), Entity Framework Core, Identity + JWT.
+- **Frontend de referência**: Angular (PWA minimalista) consumindo os endpoints do MVP.
+- **Banco de dados**: PostgreSQL.
+- **Infra local**: Docker Compose (em planejamento) e migrations controladas via `src/Infra`.
 
 ---
 
-## 📂 Estrutura do Projeto (prevista)
+## 📈 Roadmap evolutivo
+O roadmap segue o blueprint revisado, com entregas incrementais:
 
-/EuAjudo
-├── Api # Endpoints da aplicação
-├── App # Casos de uso e regras de aplicação
-├── Domain # Entidades e lógica de domínio
-├── Infra # Infraestrutura e persistência
-├── Front # Aplicação Angular
-└── docs # Documentação do projeto
+### 1. API + Frontend Angular minimalista + Infra (em andamento)
+- Endpoints de autenticação (`login` e `register`).
+- Endpoint autenticado `GET /member/me` retornando organizações, campanhas, templates e vouchers.
+- Protótipo Angular minimalista para validar contratos e UX básica.
+- Testes de integração cobrindo fluxos críticos.
+
+### 2. API + Application + Infra
+- Introdução de uma camada Application intermediando controllers e DbContext.
+- Refinamento de validações e regras de negócio fora dos controllers.
+
+### 3. API + Infra como serviços
+- Serviços específicos para orquestrar consultas/escritas no DbContext.
+- Preparação para desacoplar domínio das entidades de persistência.
+
+### 4. Minimal API + Application simplificado
+- Controllers enxutos, orquestração em services.
+- Regras mais ricas com princípios SOLID.
+
+### 5. Arquitetura Enterprise (DDD completo)
+- Camadas Domain/Application/Infra bem definidas.
+- Multi-tenancy, observabilidade, pipelines CI/CD e automações de qualidade.
 
 ---
 
-### 💡 Sobre o Projeto
+## 📂 Estrutura atual do repositório
+```
+euajudo.social.com/
+├── blueprint.md                     # Roadmap e diretrizes estratégicas
+├── README.md                        # Este documento
+├── EntitiesDataModelMap.md          # Resumo das entidades do domínio
+├── UseCasesToEndpointsDefinition.md # Contratos MVP entre frontend e API
+├── TestsReferences.md               # Orientações de testes automatizados
+├── EuAjudo.sln
+└── src/
+    ├── Api/                         # Projeto ASP.NET Core (controllers, Program.cs)
+    ├── Core/                        # Entidades de domínio e regras básicas
+    ├── Infra/                       # DbContext, migrations, seeds, Identity
+    ├── InfraTests/                  # Testes de integração/infra
+    └── Utils/                       # Utilitários compartilhados
+```
 
-O **EuAjudo** nasceu com a missão de **ampliar o alcance de ações sociais** através da tecnologia.  
-Queremos transformar a solidariedade em algo mais acessível, escalável e organizado.  
+O frontend Angular minimalista será versionado em `src/Frontend` durante a conclusão da Etapa 1.
+
+---
+
+## 💼 Para recrutadores e talent hunters
+- **Foco em entregas incrementais**: cada etapa possui documentação, backlog técnico e métricas de qualidade.
+- **Boas práticas presentes**: uso de DTOs, testes de integração, autenticação segura e planejamento de PWA.
+- **Capacidade de comunicação**: documentação alinhada (`blueprint.md`, contratos e mapa de dados) facilita onboarding de novos colaboradores.
+
+Interessado em acompanhar a evolução? Abra uma issue ou entre em contato para conversar sobre o roadmap e oportunidades de colaboração.
+
+---
+
+## ▶️ Como executar (prévia)
+1. Clonar o repositório e abrir a solução `EuAjudo.sln`.
+2. Restaurar dependências (`dotnet restore`).
+3. Configurar a string de conexão PostgreSQL no `appsettings.Development.json`.
+4. Executar `dotnet ef database update` no projeto `src/Infra` para aplicar migrations.
+5. Rodar a API (`dotnet run --project src/Api`).
+6. (Em breve) Executar `npm install && ng serve` dentro de `src/Frontend` para o protótipo Angular.
+
+---
+
+## 🤝 Contribuindo
+Contribuições são bem-vindas! Utilize Pull Requests descrevendo claramente o objetivo e referencie o blueprint quando abrir novas features. Testes automatizados são obrigatórios para endpoints novos.
+
+---
+
+## 📄 Licença
+Projeto em desenvolvimento; a licença definitiva será definida ao final do MVP.
