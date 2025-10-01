@@ -40,37 +40,75 @@ Objetivos desta documentação:
 
 O desenvolvimento seguirá uma trilha evolutiva de aprendizado e robustez, partindo de implementações mais simples até a estrutura Enterprise. Essa abordagem reflete o roadmap discutido em **"Abordagem didática"**.
 
-### Etapa 1 — **API + Infra (DbContext no Controller)**
+### Etapa 1 — **API + Frontend Angular minimalista + Infra (DbContext no Controller)**
+
+#### Objetivo da etapa
+
+Entregar o núcleo autenticado do sistema com um cliente de referência que valide o fluxo ponta a ponta:
+
+1. **Autenticação** (login + token JWT).
+2. **Consulta dos dados centrais do membro autenticado** (organizações, campanhas, templates e vouchers).
+3. **Protótipo Angular minimalista** que consome os endpoints do MVP e representa os fluxos de cadastro/login e leitura básica.
+
+#### Estado atual
+
+- Estrutura inicial simples para aprendizado, com controllers acessando diretamente o `EuAjudoDbContext`.
+- Migrations geradas diretamente no projeto `Infra`, com `EuAjudoDbContext` e Identity configurados em `src/Infra/EuAjudoDbContext.cs` e `src/Api/Program.cs`.
+- Autenticação já disponível via `POST /auth/login` em `src/Api/Controllers/AuthController.cs`, retornando `{ token, expiresAt }`.
+- Endpoint autenticado `GET /member/me` em `src/Api/Controllers/MemberController.cs`, trazendo o `Member` associado ao token, suas organizações, campanhas e templates de vouchers.
+- Seeds iniciais configurados para provisionar um usuário administrador e artefatos mínimos (ver `src/Infra/DevSeedData.cs`).
+
+#### Pendências para concluir a etapa
+
+1. **Cadastro de usuário (backend)** — implementar `POST /auth/register` que crie `AppUser` + `Member`, valide e-mail único e retorne confirmação ou token imediato (`AuthController.cs`).
+2. **Ampliação do contrato de `member/me`** — incluir a lista de `VoucherInstance` relacionados ao membro autenticado, conforme especificado em `UseCasesToEndpointsDefinition.md` (`MemberController.cs`).
+3. **Protótipo Angular minimalista** — iniciar o projeto em `src/Frontend` (Angular), com telas para registro/login e dashboard básico que consome `member/me`, servindo como cliente de validação de contratos.
+4. **Atualização de `Api.http` e testes** — adicionar exemplos de requisições para registro e member/vouchers, além de testes de integração cobrindo os novos fluxos (`src/Api/Api.http`, `src/InfraTests`).
+
+#### Referências de código relevantes
+
+- `src/Api/Controllers/AuthController.cs`
+- `src/Api/Controllers/MemberController.cs`
+- `src/Api/Program.cs`
+- `src/Api/Api.http`
+- `src/Core/Models/*`
+- `src/Infra/EuAjudoDbContext.cs`
+- `src/Infra/DevSeedData.cs`
+- `src/Infra/Auth/AppUserModel.cs`
+- `src/InfraTests/Entities/*`
 
 > **Centralidade de Member**
-> O AppUser é apenas a credencial de login.
-> Member é a entidade central do domínio: todo bootstrap e todas as atividades (Organizações, Campanhas, Vouchers, Vendas) partem dele.
-> Por isso, o login não retorna dados de domínio — esse papel é do MemberController (que usará o MemberId resolvido do token).
-
-- Estrutura inicial simples, para aprendizado.
-- Controllers acessam o `DbContext` diretamente.
-- Migrations geradas direto no projeto de Infra.
+> O `AppUser` é apenas a credencial de login.
+> `Member` é a entidade central do domínio: todo bootstrap e todas as atividades (Organizações, Campanhas, Vouchers, Vendas) partem dele.
+> Por isso, o login não retorna dados de domínio — esse papel é do `MemberController` (que usa o `MemberId` resolvido do token).
 
 #### Referencia da organização do código
 
 > mapa de referencia da estrutura de pastas do projeto euajudo.social.br
 
 ```
-\euajudo
-\euajudo\src
-\euajudo\src\Api //-> Projeto que disponibiliza o sistema para cliente frontend.
-\euajudo\src\Api\appsettings.json // contém string de conexão
-\euajudo\src\Core //-> Projeto que reune todas as regras de negócio e a modelagem das entidades.
-\euajudo\src\Core\Models // definição das entidades.
-\euajudo\src\Infra //-> Projeto que gerencia repositório, dbcontext
-\euajudo\src\Infra\EuAjudoDbContext.cs
-\euajudo\src\InfraTests //-> Projeto para testar a infraestrutura model-dbcontext-postgres e a relação entre entidades.
-\euajudo\src\InfraTests\Entities // um arquivo de teste por entidade e um arquivo de testes de relações entre entidades.
-\euajudo\src\Utils // coleção de classes de apoio atuais e futuras.
-\euajudo\Blueprint.md //-> referências técnicas e funcionais para o desenvolvimento do projeto euajudo.social.
-\euajudo\EntitiesDataModelMap.md //-> referência da modelagem de dados das entidades.
-\euajudo\FolderMap.md //-> este arquivo, mapeamento das pastas que compõem o projeto euajudo.social
-\euajudo\EuAjudo.sln
+\euajudo.social.com
+\euajudo.social.com\Blueprint.md // documento atual com roadmap e diretrizes do projeto.
+\euajudo.social.com\UseCasesToEndpointsDefinition.md // mapeia casos de uso para contratos de API.
+\euajudo.social.com\EntitiesDataModelMap.md // referência da modelagem de dados das entidades.
+\euajudo.social.com\TestsReferences.md // visão geral dos cenários de testes planejados.
+\euajudo.social.com\README.md // instruções gerais do repositório.
+\euajudo.social.com\EuAjudo.sln
+\euajudo.social.com\src
+\euajudo.social.com\src\Api // projeto ASP.NET Core.
+\euajudo.social.com\src\Api\Controllers\AuthController.cs // login implementado, cadastro pendente.
+\euajudo.social.com\src\Api\Controllers\MemberController.cs // expõe o endpoint member/me.
+\euajudo.social.com\src\Api\Program.cs // configuração de serviços, Identity, JWT e EF Core.
+\euajudo.social.com\src\Api\Api.http // coleção de requisições de referência para a API.
+\euajudo.social.com\src\Core // regras de negócio e modelagem das entidades.
+\euajudo.social.com\src\Core\Models // definições das entidades do domínio.
+\euajudo.social.com\src\Infra // acesso a dados, DbContext e seeds.
+\euajudo.social.com\src\Infra\EuAjudoDbContext.cs
+\euajudo.social.com\src\Infra\DevSeedData.cs // popula dados iniciais para desenvolvimento.
+\euajudo.social.com\src\Infra\Auth\AppUserModel.cs // configuração Identity/AppUser.
+\euajudo.social.com\src\InfraTests // testes de infraestrutura (PostgreSQL, entidades, relacionamentos).
+\euajudo.social.com\src\InfraTests\Entities // testes de validação das entidades.
+\euajudo.social.com\src\Utils // classes utilitárias compartilhadas.
 ```
 
 ### Etapa 2 — **API + Application + Infra (sem Domain explícito)**
