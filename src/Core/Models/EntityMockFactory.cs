@@ -25,6 +25,7 @@ public static class EntitiesMockFactory
     {
                 return new Organization
                 {
+                    ShortName = "Nome Curto da ONG Exemplo",
                     Description = "ONG Exemplo",
                     Country = "Brazil",
                     State = "SP",

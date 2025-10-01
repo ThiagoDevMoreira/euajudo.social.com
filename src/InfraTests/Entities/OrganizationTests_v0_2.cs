@@ -21,6 +21,7 @@ public class OrganizationTests
     public void Should_Validate_When_Optional_Fields_AreNullOrEmpty()
     {
         var org = EntitiesMockFactory.Create<Organization>();
+        org.LongName = null;
         org.Website = null;
         org.UpdatedAt = null;
         org.DeletedAt = null;
@@ -43,6 +44,7 @@ public class OrganizationTests
     }
 
     [Theory(DisplayName = "Deve falhar ao validar Organization sem campos obrigatórios")]
+    [InlineData("ShortName")]
     [InlineData("Description")]
     [InlineData("Country")]
     [InlineData("State")]

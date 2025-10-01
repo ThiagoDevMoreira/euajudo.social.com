@@ -8,7 +8,10 @@ public record Document (string Number, string Type);
 
 public class Organization
 {
+
     [Required, Key] public Guid Id { get; set; } = Guid.NewGuid();
+    [Required] public required string ShortName { get; set; }
+    [Required] public string? LongName { get; set; }
     [Required] public required string Description { get; set; }
     [Required] public required string Country { get; set; }
     [Required] public required string State { get; set; }
@@ -35,6 +38,7 @@ public class Organization
     {
         this.ValidateGuidField(Id);
         this.ValidateRequiredStringsFields(
+            "SortName",
             "Description",
             "Country",
             "State",
