@@ -60,13 +60,11 @@ public static class SeedData
         orgMember.RoleId = role.Id; 
         context.OrganizationMember.Add(orgMember);
 
-        // 6. Campaign
         var campaign = EntitiesMockFactory.Create<Campaign>();
         campaign.Organization = organization;
         campaign.OrganizationId = organization.Id;
         context.Campaign.Add(campaign);
 
-        // 7. VoucherTemplate
         var template = EntitiesMockFactory.Create<VoucherTemplate>();
         template.Organization = organization;
         template.OrganizationId = organization.Id;
@@ -74,7 +72,6 @@ public static class SeedData
         template.CampaignId = campaign.Id;
         context.VoucherTemplate.Add(template);
 
-        // 8. Sale
         var sale = EntitiesMockFactory.Create<Sale>();
         sale.Member = member;
         sale.MemberId = member.Id;
@@ -82,7 +79,6 @@ public static class SeedData
         sale.CampaignId = campaign.Id;
         context.Sale.Add(sale);
 
-        // 9. VoucherInstance
         var cupom_001 = EntitiesMockFactory.Create<VoucherInstance>();
         cupom_001.VoucherTemplate = template;
         cupom_001.VoucherTemplateId = template.Id;
