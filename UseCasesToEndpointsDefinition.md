@@ -1,35 +1,55 @@
-# Necessidade de dados.
+# Use Cases → API Contracts (Etapa 1)
 
-## Página de Login
+Este guia descreve os contratos mínimos que o backend deve atender e como o protótipo Angular minimalista irá consumi-los. Serve como fonte única de verdade para alinhamento entre API e frontend.
 
-* Recolhe dados de login:
-    - usuario
-    - senha
+## Login
 
-Montar mecanismo de login de forma independente das demais regras de negócio. Inclusive para que possa ser mantido/substituído facilmente nas próximas etapas.
+### Dados coletados no frontend
+- `email`
+- `password`
 
-### Caso a 'Autenticação' do login seja aceita o endpoint deve retornar:
+O protótipo Angular deve apresentar um formulário simples com validação básica e acionar `POST /auth/login`.
 
-Esta resposta deve ser montada um DTO entregue pela API para o cliente frontend, com esses dados o frontend tem o necessário para solicitar novas requests para a API conforme necessário.
+### Resposta esperada do endpoint
+Quando as credenciais forem válidas, a API deve retornar um DTO com:
+- `token` (JWT)
+- `expiresAt`
 
-Apesar de que a entidade `Organization` seja a "maior" em hierarquia de relações entre entidades, no sistema a entidade mais importante é `Member`, pois a partir dele se desdobram todas as outras atividades no sistema.
+Após autenticar, o frontend deve solicitar `GET /member/me` para carregar o contexto do usuário.
 
-Aqui a resposta do endpoint:
+Em caso de erro de autenticação, retornar mensagem amigável e `401 Unauthorized`.
 
-* Flag de autenticação aceita. (mecanismo de login)
+## Cadastro de usuário
 
-Resolvido o login, dispara a resposta com estes dados:
+### Dados coletados no frontend
+- `firstName`
+- `lastName`
+- `email`
+- `password`
+- `whatsAppNumber`
 
-* Datos de `Member` com todos os dados.
-* Lista de `Organizations` com dados carregados conforme que ele faça parte, com a adição do campo `Organization.Role` para cada organização da lista.
-* Lista de `Campaigns` com dados carregados conforme que ele faça parte.
-* Lista de `VoucherTemplate` com dados carregados conforme sejam de campanhas que ele é coordenador ou membro.
-* Lista de `VoucherInstance` com dados carregados conforme ele seja o vendedor (`VoucherInstance.Member`)
+O protótipo Angular deve oferecer um fluxo simples de cadastro e, após sucesso, opcionalmente autenticar automaticamente o usuário reutilizando a resposta do backend.
 
-### Caso a 'Autenticação' seja aceita o end point deve retornar:
+### Resposta esperada do endpoint `POST /auth/register`
+- Confirmação de criação (`201 Created`) com payload contendo o `memberId` e, se disponível, o token JWT para auto login.
+- Mensagens de validação claras para campos faltantes ou e-mail duplicado (`400 BadRequest`).
 
-* Flag de autenticação rejeitada.
+## Perfil do membro autenticado (`GET /member/me`)
 
-## Estratégia
+Após o login, o frontend consome este endpoint para renderizar o painel inicial.
 
-Simular o login (ou manter o mais simples possível) e mockar o banco para desenvolver o endpoint.
+### Payload esperado
+- `member`: dados básicos (`id`, `firstName`, `lastName`, `email`, `whatsAppNumber`).
+- `organizations`: lista das organizações com campo adicional `role`.
+- `campaigns`: campanhas em que o membro atua.
+- `voucherTemplates`: templates associados às campanhas relevantes.
+- `voucherInstances`: vouchers emitidos cujo vendedor é o membro autenticado.
+
+O frontend deve usar esse payload para montar cards de resumo e tabelas minimalistas, demonstrando domínio funcional.
+
+## Estratégia de desenvolvimento
+1. Formalizar esses contratos em testes de integração (Postman, HTTP files ou xUnit).
+2. Implementar o protótipo Angular com serviços tipados (`HttpClient`) espelhando os DTOs.
+3. Validar fluxos ponta a ponta usando usuários seeded e cenários de cadastro real.
+
+Manter este documento sincronizado com qualquer ajuste no blueprint ou na API garante que backend e frontend evoluam em paralelo durante a Etapa 1.
