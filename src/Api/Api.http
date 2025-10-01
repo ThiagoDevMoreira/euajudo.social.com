@@ -3,7 +3,7 @@
 GET {{Api_HostAddress}}/weatherforecast/
 Accept: application/json
 
-### Teste do Login
+### Teste do Login Admin
 POST {{Api_HostAddress}}/auth/login
 Content-Type: application/json
 
@@ -12,7 +12,35 @@ Content-Type: application/json
   "password": "Admin@123"
 }
 
-### Me (com token)
+### Teste do Login Maria
+POST {{Api_HostAddress}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "maria@euajudo.org",
+  "password": "Maria@123"
+}
+
+### Teste do Login Pedro
+POST {{Api_HostAddress}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "pedro@euajudo.org",
+  "password": "Pedro@123"
+}
+
+### Me Admin (com token)
 GET http://localhost:5184/member/me
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyNTYzMzE0MC00Yjg3LTRjOTEtYTBiOS0yMjJlZGE1Zjc2ZjEiLCJtZW1iZXJJZCI6ImVkZTQzZTA5LTBlYzEtNDQ4OS1hYzY2LTQ4Yzg0ZTkwNTgxZiIsImVtYWlsIjoiYWRtaW5AZXVhanVkby5vcmciLCJleHAiOjE3NTkyODA3NjEsImlzcyI6ImV1YWp1ZG8uYXBpIiwiYXVkIjoiZXVhanVkby5hcGkifQ.BrSD3vMRKl85igOK1FtF5i-QNeS_NW4vFgz5hBflYfo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4ZDAyNTNmMy02OGUyLTRhMmEtYmI4OS1iNzZkMjYzMmJiMmUiLCJtZW1iZXJJZCI6IjBmZGE4YzFjLTY5YzYtNGI0ZC1iNDcyLTM2NTE3NGMxN2E0MCIsImVtYWlsIjoiYWRtaW5AZXVhanVkby5vcmciLCJleHAiOjE3NTkyODQ1NTYsImlzcyI6ImV1YWp1ZG8uYXBpIiwiYXVkIjoiZXVhanVkby5hcGkifQ.RpighSQ5LJJPBFMzvSwfWl61kJQ9pYOMjxloB4zLmmE
+Accept: application/json
+
+### Me Maria (com token)
+GET http://localhost:5184/member/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1M2RkOGY1NC05MTM1LTRjOWEtOWNjYS0yYzkzYjA0MmY2NGEiLCJtZW1iZXJJZCI6IjRkNjMyZWM2LWI0ODYtNGFlMi04YjM2LWMyOGZkYzQwZjg0NyIsImVtYWlsIjoibWFyaWFAZXVhanVkby5vcmciLCJleHAiOjE3NTkyODQ1ODcsImlzcyI6ImV1YWp1ZG8uYXBpIiwiYXVkIjoiZXVhanVkby5hcGkifQ.R3ezB6X7h9xq59bmM5XXVVMJe5oztRenWmrDe5qYwJY
+Accept: application/json
+
+### Me Pedro (com token)
+GET http://localhost:5184/member/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxY2Q4MDE0NC05ZjBmLTQ1NTAtOTA3My0wM2QyMjM2Y2NjYTUiLCJtZW1iZXJJZCI6ImIxYzdkOThlLTQwZjItNDhmNy04YTliLTBiMTc0YWU2ODMxMCIsImVtYWlsIjoicGVkcm9AZXVhanVkby5vcmciLCJleHAiOjE3NTkyODQ2NDIsImlzcyI6ImV1YWp1ZG8uYXBpIiwiYXVkIjoiZXVhanVkby5hcGkifQ.q260WImAztQpvGZgW45_TbCLvSAxO76zyQO44N6nqTw
 Accept: application/json

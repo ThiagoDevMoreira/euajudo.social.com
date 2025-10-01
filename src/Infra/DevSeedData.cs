@@ -15,18 +15,15 @@ public static class SeedData
     {
         await context.Database.MigrateAsync();
 
-        // 👉 Se já existe algum usuário, não roda o seed
         if (await userManager.Users.AnyAsync())
             return;
 
-        // 1. Criar Member usando a EntityMockFactory
         var member = EntitiesMockFactory.Create<Member>();
         member.Email = "admin@euajudo.org";    // e-mail fixo para login
         member.FirstName = "Admin";
         member.LastName = "Seed";
         context.Member.Add(member);
 
-        // 2. Criar AppUser vinculado ao Member
         var appUser = new AppUser
         {
             Id = Guid.NewGuid(),
