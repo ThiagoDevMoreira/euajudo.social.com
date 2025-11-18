@@ -62,7 +62,7 @@ Entregar o núcleo autenticado do sistema com um cliente de referência que vali
 
 1. **Cadastro de usuário (backend)** — implementar `POST /auth/register` que crie `AppUser` + `Member`, valide e-mail único e retorne confirmação ou token imediato (`AuthController.cs`).
 2. **Ampliação do contrato de `member/me`** — incluir a lista de `VoucherInstance` relacionados ao membro autenticado, conforme especificado em `UseCasesToEndpointsDefinition.md` (`MemberController.cs`).
-3. **Protótipo Angular minimalista** — iniciar o projeto em `src/Frontend` (Angular), com telas para registro/login e dashboard básico que consome `member/me`, servindo como cliente de validação de contratos.
+3. **Protótipo Angular minimalista** — iniciar o projeto em `src/Web/FrontApp/...` (Angular), com telas para registro/login e dashboard básico que consome `member/me`, servindo como cliente de validação de contratos.
 4. **Atualização de `Api.http` e testes** — adicionar exemplos de requisições para registro e member/vouchers, além de testes de integração cobrindo os novos fluxos (`src/Api/Api.http`, `src/InfraTests`).
 
 #### Referências de código relevantes
